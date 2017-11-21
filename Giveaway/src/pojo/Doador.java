@@ -6,8 +6,7 @@ public class Doador {
 	private String nome;
 	private String email;
 	private String senha;
-	private String telefone;
-	private Endereco endereco;
+	
 	
 	
 	
@@ -15,13 +14,12 @@ public class Doador {
 		
 	}
 		
-	public Doador(String nome, String email, String senha, String telefone, Endereco endereco) {
+	public Doador(String nome, String email, String senha) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.telefone = telefone;
-		this.endereco = endereco;
+		
 	}
 
 	//MÉTODOS
@@ -33,14 +31,7 @@ public class Doador {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -58,20 +49,12 @@ public class Doador {
 		
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 }
