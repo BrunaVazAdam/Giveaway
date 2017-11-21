@@ -57,7 +57,7 @@ public class Main {
 					if(instituicao.getDescricao() != null){
 						do{
 							logado = true;
-							System.out.println("1 - Gerenciar Eventos\n2 - Alterar Descrição\n3 - Alterar Cadastro\n4 - Excluir Cadastro\n5 - Listar Doações\n6 - Deslogar");
+							System.out.println(" \n1 - Gerenciar Eventos\n2 - Alterar Descrição\n3 - Alterar Cadastro\n4 - Excluir Cadastro\n5 - Listar Doações\n6 - Deslogar");
 							int i = t.nextInt();
 							if(i == 1){
 								System.out.println("1 - Criar Evento\n2 - Alterar Evento\n3 - Excluir Evento");
@@ -97,8 +97,9 @@ public class Main {
 							} else if(i == 2){
 								
 								t.nextLine();
-								System.out.println("Editar descrição: ");
+								System.out.print("Digite a nova descrição: ");
 								descricao = t.nextLine();
+								instituicao.setDescricao(descricao);
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
