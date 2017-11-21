@@ -103,6 +103,15 @@ public class Main {
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
+								t.hasNextLine();
+								System.out.println("Altere o cadastro: ");
+								nome = t.nextLine();
+								senha = t.nextLine();
+								descricao = t.nextLine();
+								instituicao.setNome(nome);
+								instituicao.setSenha(senha);
+								instituicao.setDescricao(descricao);
+								instituicaoDAO.editar(instituicao);
 								
 							} else if(i == 4){
 								

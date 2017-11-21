@@ -121,7 +121,29 @@ public class InstituicaoDAO{
 		}
 		return instituicao;
 	}
-	
+	public Instituicao editar(Instituicao instituicao){
+		String sqlUpdate = "UPDATE instituicao SET nome = ? senha = ?, descricao = ? WHERE id_instituicao = ?";
+		this.conexao.abrirConexao();
+		try {
+			PreparedStatement statement = this.conexao.getConexao().prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, instituicao.getNome());
+			statement.setString(2, instituicao.getSenha());
+			statement.setString(3, instituicao.getDescricao());
+			statement.setLong(4, instituicao.getId());
+			statement.executeUpdate();
+			 ResultSet rs = statement.getGeneratedKeys();
+			    if(rs.next()){
+			    	 instituicao.setId(rs.getLong(4));
+			    	 
+			    }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			this.conexao.fecharConexao();
+		}
+		return instituicao;
+}
 }
 
 
