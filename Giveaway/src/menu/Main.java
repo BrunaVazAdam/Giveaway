@@ -103,8 +103,11 @@ public class Main {
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
+								System.out.println("Deseja alterar: \n1- Dados da Instituição\n2- Endereço da Instituição");
+								int b = t.nextInt();
+								if(b==1){
 								t.nextLine();
-								System.out.print("Altere o cadastro:  ");
+								System.out.print("Dados da Instituição:  ");
 								System.out.print("\nNome: ");
 								nome = t.next();
 								System.out.print("Senha: ");
@@ -115,7 +118,26 @@ public class Main {
 								instituicao.setSenha(senha);
 								instituicao.setDescricao(descricao);
 								instituicaoDAO.editar(instituicao);
-								
+									}else if(b == 2){
+										t.nextLine();
+								System.out.println("Endereço da Instituição:");
+								System.out.println("\nCidade: ");
+								cidade = t.nextLine();
+								instituicao.getEndereco().setCidade(cidade);
+								System.out.println("Bairro: ");
+								bairro = t.nextLine();
+								instituicao.getEndereco().setBairro(bairro);
+								System.out.println("Rua: ");
+								rua = t.nextLine();
+								instituicao.getEndereco().setRua(rua);
+								System.out.println("Num: ");
+								num = t.nextLine();
+								instituicao.getEndereco().setNum(num);
+								System.out.println("CEP: ");
+								cep = t.nextLine();
+								instituicao.getEndereco().setCep(cep);
+								enderecoDAO.editar(instituicao.getEndereco());
+								}
 							} else if(i == 4){
 								//instituicaoDAO.deletar(instituicao);
 								//logado = false;
