@@ -97,17 +97,20 @@ public class Main {
 							} else if(i == 2){
 								
 								t.nextLine();
-								System.out.print("Digite a nova descrição: ");
+								System.out.print("Digite a nova descrição:  ");
 								descricao = t.nextLine();
 								instituicao.setDescricao(descricao);
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
 								t.hasNextLine();
-								System.out.println("Altere o cadastro: ");
-								nome = t.nextLine();
-								senha = t.nextLine();
-								descricao = t.nextLine();
+								System.out.print("Altere o cadastro:  ");
+								System.out.print("\nNome: ");
+								nome = t.next();
+								System.out.print("Senha: ");
+								senha = t.next();
+								System.out.print("Descrição: ");
+								descricao = t.next();
 								instituicao.setNome(nome);
 								instituicao.setSenha(senha);
 								instituicao.setDescricao(descricao);
