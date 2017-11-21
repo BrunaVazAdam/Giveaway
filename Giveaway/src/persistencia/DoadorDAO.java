@@ -19,10 +19,8 @@ public class DoadorDAO {
 
 	public Doador login(String email, String senha) {
 		String sqlSelect = "SELECT * from doador where doador.email='" + email + "'";
-		String sqlSelectEndereco = "SELECT * FROM endereco WHERE endereco.id_endereco = ?";
-		Endereco endereco = new Endereco();
 		Doador doador = new Doador();
-		int idEndereco = 0;
+		
 		this.conexao.abrirConexao();
 		try {
 			Statement statement = this.conexao.getConexao().createStatement();
@@ -32,27 +30,11 @@ public class DoadorDAO {
 				if (rs.getString("senha").equals(senha)) {
 					doador.setNome(rs.getString("nome"));
 					doador.setSenha(rs.getString("senha"));
-					doador.setTelefone(rs.getString("telefone"));
 					doador.setId(Integer.parseInt(rs.getString("id_doador")));
 					doador.setEmail(email);
-					idEndereco = Integer.parseInt(rs.getString("cod_id_endereco"));
-					try { 
-						PreparedStatement statementEnd = this.conexao.getConexao().prepareStatement(sqlSelectEndereco);
-						statementEnd.setString(1, Integer.toString(idEndereco));
-						ResultSet rsEnd = statementEnd.executeQuery();
-						rsEnd = statementEnd.getResultSet();
-						if(rsEnd != null && rsEnd.next()) {
-							endereco.setIdEndereco(Integer.parseInt(rsEnd.getString("id_endereco")));
-							endereco.setBairro(rsEnd.getString("bairro"));
-							endereco.setCidade(rsEnd.getString("cidade"));
-							endereco.setRua(rsEnd.getString("rua"));
-							endereco.setNum(rsEnd.getString("num"));
-							endereco.setCep(rsEnd.getString("cep"));
-							doador.setEndereco(endereco);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					
+						
+					
 				} else {
 					System.out.println("Senha errada!");
 				}
@@ -71,7 +53,7 @@ public class DoadorDAO {
 	}
 
 	public Doador salvar(Doador doador) {
-		String sqlInsert = "INSERT INTO doador VALUES(null, ?, ?, ?, ?, ?)";
+		String sqlInsert = "INSERT INTO doador VALUES(null, ?, ?, ?)";
 		this.conexao.abrirConexao();
 		try {
 			PreparedStatement statement = this.conexao.getConexao().prepareStatement(sqlInsert,
@@ -79,7 +61,6 @@ public class DoadorDAO {
 			statement.setString(1, doador.getNome());
 			statement.setString(2, doador.getEmail());
 			statement.setString(3, doador.getSenha());
-			statement.setString(4, doador.getTelefone());
 			statement.executeUpdate();
 			ResultSet rs = statement.getGeneratedKeys();
 			if (rs.next()) {

@@ -103,7 +103,7 @@ public class Main {
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
-								t.hasNextLine();
+								t.nextLine();
 								System.out.print("Altere o cadastro:  ");
 								System.out.print("\nNome: ");
 								nome = t.next();
@@ -117,6 +117,9 @@ public class Main {
 								instituicaoDAO.editar(instituicao);
 								
 							} else if(i == 4){
+								//instituicaoDAO.deletar(instituicao);
+								//logado = false;
+								
 								
 							} else if(i == 5){
 								listaDoacoes = doacoesDAO.listarDoacoesPorInst(instituicao.getId());
@@ -304,28 +307,13 @@ public class Main {
 				if (z == 2) {
 					// doador
 					t.nextLine();
-					System.out.print("Nome: ");
+					System.out.print("Nome:");
 					nome = t.nextLine();
-					System.out.print("Email: ");
+					System.out.print("Email:");
 					email = t.nextLine();
-					System.out.print("Senha: ");
+					System.out.print("Senha:");
 					senha = t.nextLine();
-					System.out.print("Telefone: ");
-					telefone = t.nextLine();
-					System.out.print("Cidade: ");
-					cidade = t.nextLine();
-					System.out.print("Bairro: ");
-					bairro = t.nextLine();
-					System.out.print("Rua: ");
-					rua = t.nextLine();
-					System.out.print("Número: ");
-					num = t.nextLine();
-					System.out.print("cep: ");
-					cep = t.nextLine();
-
-					endereco = new Endereco(cidade, bairro, rua, num, cep);
-					enderecoDAO.salvar(endereco);
-					doador = new Doador(nome, email, senha, telefone, endereco);
+					doador = new Doador( nome, email, senha);
 					doadorDAO.salvar(doador);
 				}
 			}
