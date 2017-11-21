@@ -91,10 +91,15 @@ public class Main {
 									eventoDAO.salvar(evento, instituicao.getId());
 								} else if(e == 2){
 									
-								} else if(e == 3){
+									} else if(e == 3){
 									
 								}
 							} else if(i == 2){
+								
+								t.nextLine();
+								System.out.println(" Editar descrição: ");
+								descricao = t.nextLine();
+								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
 								
