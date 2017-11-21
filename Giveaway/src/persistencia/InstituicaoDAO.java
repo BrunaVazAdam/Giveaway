@@ -105,12 +105,12 @@ public class InstituicaoDAO{
 		this.conexao.abrirConexao();
 		try {
 			PreparedStatement statement = this.conexao.getConexao().prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
-			statement.setLong(1, instituicao.getId());
-			statement.setString(2, instituicao.getDescricao());
+			statement.setString(1, instituicao.getDescricao());
+			statement.setLong(2, instituicao.getId());
 			statement.executeUpdate();
 			 ResultSet rs = statement.getGeneratedKeys();
 			    if(rs.next()){
-			    	 instituicao.setId(rs.getLong(0));
+			    	 instituicao.setId(rs.getLong(2));
 			    	 
 			    }
 		} catch (SQLException e) {

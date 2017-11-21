@@ -97,7 +97,7 @@ public class Main {
 							} else if(i == 2){
 								
 								t.nextLine();
-								System.out.println(" Editar descrição: ");
+								System.out.println("Editar descrição: ");
 								descricao = t.nextLine();
 								instituicaoDAO.editarDescricao(instituicao);
 								
