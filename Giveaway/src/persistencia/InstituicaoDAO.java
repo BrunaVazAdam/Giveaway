@@ -100,6 +100,28 @@ public class InstituicaoDAO{
 	}
        
 
+	public Instituicao editarDescricao(Instituicao instituicao){
+		String sqlUpdate = "UPDATE instituicao SET descricao = ? WHERE id_instituicao = ?";
+		this.conexao.abrirConexao();
+		try {
+			PreparedStatement statement = this.conexao.getConexao().prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
+			statement.setLong(1, instituicao.getId());
+			statement.setString(2, instituicao.getDescricao());
+			statement.executeUpdate();
+			 ResultSet rs = statement.getGeneratedKeys();
+			    if(rs.next()){
+			    	 instituicao.setId(rs.getLong(0));
+			    	 
+			    }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			this.conexao.fecharConexao();
+		}
+		return instituicao;
+	}
 	
 }
+
 
