@@ -25,7 +25,7 @@ public class Main {
 		boolean sair, logado;
 		Doador doador;
 		Doacoes doacoes;
-		Evento evento;
+		Evento evento ;
 		Instituicao instituicao;
 		Endereco endereco;
 		EventoDAO eventoDAO = new EventoDAO();
@@ -57,10 +57,10 @@ public class Main {
 					if(instituicao.getDescricao() != null){
 						do{
 							logado = true;
-							System.out.println(" \n1 - Gerenciar Eventos\n2 - Alterar Descrição\n3 - Alterar Cadastro\n4 - Excluir Cadastro\n5 - Listar Doações\n6 - Deslogar");
+							System.out.println(" \n1 - Gerenciar Eventos\n2 - Alterar Descrição\n3 - Alterar Cadastro\n4 - Listar Doações\n5 - Deslogar");
 							int i = t.nextInt();
 							if(i == 1){
-								System.out.println("1 - Criar Evento\n2 - Alterar Evento\n3 - Excluir Evento");
+								System.out.println("1 - Criar Evento\n2 - Listar Evento\n");
 								int e = t.nextInt();
 								if(e == 1){
 									t.nextLine();
@@ -90,8 +90,78 @@ public class Main {
 									evento = new Evento(nomeEv, organizacao, data, desc, endereco, hora);
 									eventoDAO.salvar(evento, instituicao.getId());
 								} else if(e == 2){
+									listaEventos = eventoDAO.listarEventosPorInstituicao(instituicao.getId());
+									int cont = 0;
+									for(Evento event: listaEventos){
+										cont++;
+										System.out.println(cont+ " - Evento");
+										System.out.println("Nome: " + event.getNomeEv()+"\n");	
+									}
+									if(!listaEventos.isEmpty()){
+										System.out.println("Qual evento deseja vizualizar?");
+										int j = t.nextInt();
+										evento = listaEventos.get(j-1);
+										System.out.println("Nome: " + evento.getNomeEv());
+										System.out.println("Data: " + evento.getData());
+										System.out.println("Hora: " + evento.getHora());
+										System.out.println("Descrição: " + evento.getDescricao());
+										System.out.println("Organização: " + evento.getOrganizacao());
+										System.out.println("Cidade: " + evento.getEndereco().getCidade());
+										System.out.println("Bairro: " + evento.getEndereco().getBairro());
+										System.out.println("Rua: " + evento.getEndereco().getRua() + ", " + evento.getEndereco().getNum());
+										System.out.println("Cep: " + evento.getEndereco().getCep() + "\n");
+										
+										System.out.println("Deseja alterar: \n1 - Dados do Evento\n2 - Endereço do Evento\n3 - Excluir Evento");
+										int c = t.nextInt();
+										if(c==1){
+											t.nextLine();
+											System.out.println("Dados do Evento: ");
+											System.out.print("\nNome: ");
+											String nomeEv = t.nextLine();
+											System.out.print("Data - DD/MM/AAAA: ");
+											String data = t.nextLine();
+											System.out.print("Horário: - 00:00 ");
+											String hora = t.nextLine();
+											System.out.print("Organizadores: ");
+											String organizacao = t.nextLine();
+											System.out.print("Descricao: ");
+											String desc = t.nextLine();
+											evento.setNomeEv(nomeEv);
+											evento.setData(data);
+											evento.setHora(hora);
+											evento.setOrganizacao(organizacao);
+											evento.setDescricao(desc);
+											eventoDAO.editar(evento);
+										} else if(c == 2){
+											t.nextLine();
+											System.out.println("Endereco do Evento: \n");
+											System.out.print("Cidade: ");
+											cidade = t.nextLine();
+											System.out.print("Bairro: ");
+											bairro = t.nextLine();
+											System.out.print("Rua: ");
+											rua = t.nextLine();
+											System.out.print("Número: ");
+											num = t.nextLine();
+											System.out.print("CEP: ");
+											cep = t.nextLine();
+											evento.getEndereco().setCidade(cidade);
+											evento.getEndereco().setBairro(bairro);
+											evento.getEndereco().setCep(cep);
+											evento.getEndereco().setNum(num);
+											evento.getEndereco().setRua(rua);
+											
+											enderecoDAO.editar(evento.getEndereco());
+										} else if(c == 3){
+											eventoDAO.deletarPorId(evento.getIdEvento());
+										} else {
+											
+										}
+									} else {
+										System.out.println("Não há eventos registrados!");
+									}
 									
-									} else if(e == 3){
+								} else if(e == 3){
 									
 								}
 							} else if(i == 2){
@@ -103,12 +173,12 @@ public class Main {
 								instituicaoDAO.editarDescricao(instituicao);
 								
 							} else if(i == 3){
-								System.out.println("Deseja alterar: \n1- Dados da Instituição\n2- Endereço da Instituição");
+								System.out.println("Deseja alterar: \n1 - Dados da Instituição\n2 - Endereço da Instituição");
 								int b = t.nextInt();
 								if(b==1){
 								t.nextLine();
-								System.out.print("Dados da Instituição:  ");
-								System.out.print("\nNome: ");
+								System.out.print("Dados da Instituição: \n");
+								System.out.print("Nome: ");
 								nome = t.next();
 								System.out.print("Senha: ");
 								senha = t.next();
@@ -121,29 +191,24 @@ public class Main {
 									}else if(b == 2){
 										t.nextLine();
 								System.out.println("Endereço da Instituição:");
-								System.out.println("\nCidade: ");
+								System.out.print("\nCidade: ");
 								cidade = t.nextLine();
 								instituicao.getEndereco().setCidade(cidade);
-								System.out.println("Bairro: ");
+								System.out.print("Bairro: ");
 								bairro = t.nextLine();
 								instituicao.getEndereco().setBairro(bairro);
-								System.out.println("Rua: ");
+								System.out.print("Rua: ");
 								rua = t.nextLine();
 								instituicao.getEndereco().setRua(rua);
-								System.out.println("Num: ");
+								System.out.print("Num: ");
 								num = t.nextLine();
 								instituicao.getEndereco().setNum(num);
-								System.out.println("CEP: ");
+								System.out.print("CEP: ");
 								cep = t.nextLine();
 								instituicao.getEndereco().setCep(cep);
 								enderecoDAO.editar(instituicao.getEndereco());
 								}
 							} else if(i == 4){
-								//instituicaoDAO.deletar(instituicao);
-								//logado = false;
-								
-								
-							} else if(i == 5){
 								listaDoacoes = doacoesDAO.listarDoacoesPorInst(instituicao.getId());
 								int contDoacoes = 0;
 								for(Doacoes doa: listaDoacoes){
@@ -151,8 +216,10 @@ public class Main {
 									System.out.println(contDoacoes + " - Valor: R$ " + doa.getValor());
 								}
 								System.out.println("\n");
-							} else if(i == 6){
+							} else if(i == 5){
 								logado = false;
+							} else {
+								
 							}
 						}while(logado);
 					}
@@ -169,7 +236,7 @@ public class Main {
 						do{
 							logado = true;
 							System.out.println("1 - Pesquisar Instituições por cidade\n2 - Pesquisar Instituições por nome "
-									+ "\n3 - Pesquisar Eventos por cidade\n4 - Pesquisar Eventos por nome\n5 - Deslogar");
+									+ "\n3 - Pesquisar Eventos por cidade\n4 - Pesquisar Eventos por nome\n5 - Alterar cadastro\n6 - Deslogar");
 							int d = t.nextInt();
 							if(d == 1){
 								
@@ -183,10 +250,10 @@ public class Main {
 									System.out.println(contInst + " - INSTITUIÇÃO: " + inst.getNome()+ "\nCidade: " + inst.getEndereco().getCidade()+"\n");
 								}
 								if(!listaInstituicoes.isEmpty()){
-									System.out.println("Qual instituição voce quer vizualizar?");
+									System.out.println("Qual instituição você quer vizualizar?");
 									int ls = t.nextInt();
 									ls --;
-									System.out.println("Nome: " + listaInstituicoes.get(ls).getNome() +
+									System.out.println("\nNome: " + listaInstituicoes.get(ls).getNome() +
 														"\nDescrição: " + listaInstituicoes.get(ls).getDescricao() + 
 														"\nEmail: " + listaInstituicoes.get(ls).getEmail() +
 														"\nTelefone: "   + listaInstituicoes.get(ls).getTelefone()+
@@ -287,8 +354,17 @@ public class Main {
 									System.out.println("Nenhum evento encontrado !");
 								}
 							} else if(d == 5){
+								t.nextLine();
+								System.out.print("Nome:");
+								nome = t.nextLine();
+								System.out.print("Senha:");
+								senha = t.nextLine();
+								doador.setNome(nome);
+								doador.setSenha(senha);
+								doadorDAO.editar(doador);
+							} else if(d == 6){
 								logado = false;
-							}	
+							}
 						}while(logado);
 					}
 				}
@@ -318,7 +394,7 @@ public class Main {
 					rua = t.nextLine();
 					System.out.print("Número: ");
 					num = t.nextLine();
-					System.out.print("cep: ");
+					System.out.print("CEP: ");
 					cep = t.nextLine();
 
 					endereco = new Endereco(cidade, bairro, rua, num, cep);
@@ -345,8 +421,8 @@ public class Main {
 		} while (!sair);
 		System.out.println("Programa finalizado!");
 				}
-			
-		}
+	        }
+		
 	
 
 
