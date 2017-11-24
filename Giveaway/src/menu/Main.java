@@ -51,7 +51,7 @@ public class Main {
 					System.out.printf("Digite seu email:");
 					t.nextLine();
 					email = t.nextLine();
-					System.out.printf("Digite sua senha:");
+					System.out.printf("Digite sua senha: ");
 					senha = t.nextLine();
 					instituicao = instituicaoDAO.login(email, senha);
 					if(instituicao.getDescricao() != null){
@@ -109,18 +109,18 @@ public class Main {
 										System.out.println("Cidade: " + evento.getEndereco().getCidade());
 										System.out.println("Bairro: " + evento.getEndereco().getBairro());
 										System.out.println("Rua: " + evento.getEndereco().getRua() + ", " + evento.getEndereco().getNum());
-										System.out.println("Cep: " + evento.getEndereco().getCep() + "\n");
+										System.out.println("CEP: " + evento.getEndereco().getCep() + "\n");
 										
 										System.out.println("Deseja alterar: \n1 - Dados do Evento\n2 - Endereço do Evento\n3 - Excluir Evento");
 										int c = t.nextInt();
 										if(c==1){
 											t.nextLine();
-											System.out.println("Dados do Evento: ");
-											System.out.print("\nNome: ");
+											System.out.print("Dados do Evento: \n");
+											System.out.print("Nome: ");
 											String nomeEv = t.nextLine();
 											System.out.print("Data - DD/MM/AAAA: ");
 											String data = t.nextLine();
-											System.out.print("Horário: - 00:00 ");
+											System.out.print("Horário: - 00:00 - ");
 											String hora = t.nextLine();
 											System.out.print("Organizadores: ");
 											String organizacao = t.nextLine();
@@ -158,7 +158,7 @@ public class Main {
 											
 										}
 									} else {
-										System.out.println("Não há eventos registrados!");
+										System.out.println("Não há eventos registrados! \n");
 									}
 									
 								} else if(e == 3){
@@ -182,10 +182,13 @@ public class Main {
 								nome = t.next();
 								System.out.print("Senha: ");
 								senha = t.next();
+								System.out.print("Telefone: ");
+								telefone = t.next();
 								System.out.print("Descrição: ");
 								descricao = t.next();
 								instituicao.setNome(nome);
 								instituicao.setSenha(senha);
+								instituicao.setTelefone(telefone);
 								instituicao.setDescricao(descricao);
 								instituicaoDAO.editar(instituicao);
 									}else if(b == 2){
@@ -229,7 +232,7 @@ public class Main {
 					System.out.printf("Digite seu email:");
 					t.nextLine();
 					email = t.nextLine();
-					System.out.printf("Digite sua senha:");
+					System.out.printf("Digite sua senha: ");
 					senha = t.nextLine();
 					doador = doadorDAO.login(email, senha);
 					if(doador.getNome() != null){
@@ -282,7 +285,7 @@ public class Main {
 								int contInst = 0;
 								for (Instituicao inst : listaInstituicoes){
 									contInst ++;
-									System.out.println(contInst + " - INSTITUIÇÃO: " + inst.getNome()+ "\nBairro: " + inst.getEndereco().getBairro()+"\n");
+									System.out.println(contInst + " - INSTITUIÇÃO: " + inst.getNome()+ "\nCidade:: " + inst.getEndereco().getCidade()+"\n");
 								}
 								if(!listaInstituicoes.isEmpty()){
 									System.out.println("Qual instituição voce quer vizualizar?");
@@ -300,14 +303,14 @@ public class Main {
 									System.out.println("\nDeseja doar para essa instituição? \n1 - Sim \n2 - Não");
 									int ds = t.nextInt();
 									if(ds == 1){
-										System.out.print("Digite o valor:");
+										System.out.print("Digite o valor: \n");
 										double valor = t.nextDouble();
 										doacoes = new Doacoes(valor, listaInstituicoes.get(ls).getId(), doador.getId());
 										doacoesDAO.salvar(doacoes);
-										System.out.printf("Parabéns, você acaba de realizar uma doaçâo para a Instituiçâo " + listaInstituicoes.get(ls).getNome() + " no valor de R$ %.2f%n", valor );
+										System.out.printf("Parabéns, você acaba de realizar uma doaçâo para a Instituiçâo " + listaInstituicoes.get(ls).getNome() + " no valor de R$ %.2f%n", valor + "\n" );
 									}
 								} else {
-									System.out.println("Nenhuma Instituição Encontrada !");
+									System.out.println("Nenhuma Instituição Encontrada ! \n");
 								}
 							} else if(d == 3){
 								t.nextLine();
