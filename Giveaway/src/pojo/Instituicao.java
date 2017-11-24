@@ -26,7 +26,7 @@ public class Instituicao {
 		this.endereco = endereco;
 	}
 
-	//MÉTODOS
+	
 	public long getId() {
 		return this.id;
 	}

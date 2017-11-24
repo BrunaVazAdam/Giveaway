@@ -267,5 +267,26 @@ public ArrayList<Instituicao> buscarTodasPorNome(String nome){
 		}
 		return listaEventos;
 	}
-
+	public Doador editar(Doador doador){
+		String sqlUpdate = "UPDATE doador SET nome = ?, senha = ? WHERE id_doador = ?";
+		this.conexao.abrirConexao();
+		try {
+			PreparedStatement statement = this.conexao.getConexao().prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
+			statement.setString(1, doador.getNome());
+			statement.setString(2, doador.getSenha());
+			statement.setLong(3, doador.getId());
+			statement.executeUpdate();
+			 ResultSet rs = statement.getGeneratedKeys();
+			    if(rs.next()){
+			    	 doador.setId(rs.getLong(1));
+			    	 
+			    }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			this.conexao.fecharConexao();
+		}
+		return doador;
+}
 }

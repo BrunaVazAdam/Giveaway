@@ -22,7 +22,7 @@ public class Doador {
 		
 	}
 
-	//MÉTODOS
+	
 	public long getId() {
 		return this.id;
 	}
