@@ -36,6 +36,20 @@ public class Main {
 		ArrayList<Instituicao> listaInstituicoes = new ArrayList<Instituicao>();
 		ArrayList<Doacoes> listaDoacoes = new ArrayList<Doacoes>();
 		ArrayList<Evento> listaEventos = new ArrayList<Evento>();
+		System.out.println(".______    _______ .___  ___.    ____    ____  __  .__   __.  _______   ______           ___       ______   \r\n" + 
+				"|   _  \\  |   ____||   \\/   |    \\   \\  /   / |  | |  \\ |  | |       \\ /  __  \\         /   \\     /  __  \\  \r\n" + 
+				"|  |_)  | |  |__   |  \\  /  |     \\   \\/   /  |  | |   \\|  | |  .--.  |  |  |  |       /  ^  \\   |  |  |  | \r\n" + 
+				"|   _  <  |   __|  |  |\\/|  |      \\      /   |  | |  . `  | |  |  |  |  |  |  |      /  /_\\  \\  |  |  |  | \r\n" + 
+				"|  |_)  | |  |____ |  |  |  |       \\    /    |  | |  |\\   | |  '--'  |  `--'  |     /  _____  \\ |  `--'  | \r\n" + 
+				"|______/  |_______||__|  |__|        \\__/     |__| |__| \\__| |_______/ \\______/     /__/     \\__\\ \\______/  \r\n" + 
+				"                                                                                                            \r\n" + 
+				"        _______  __  ____    ____  _______     ___   ____    __    ____  ___   ____    ____  __             \r\n" + 
+				"       /  _____||  | \\   \\  /   / |   ____|   /   \\  \\   \\  /  \\  /   / /   \\  \\   \\  /   / |  |            \r\n" + 
+				"      |  |  __  |  |  \\   \\/   /  |  |__     /  ^  \\  \\   \\/    \\/   / /  ^  \\  \\   \\/   /  |  |            \r\n" + 
+				"      |  | |_ | |  |   \\      /   |   __|   /  /_\\  \\  \\            / /  /_\\  \\  \\_    _/   |  |            \r\n" + 
+				"      |  |__| | |  |    \\    /    |  |____ /  _____  \\  \\    /\\    / /  _____  \\   |  |     |__|            \r\n" + 
+				"       \\______| |__|     \\__/     |_______/__/     \\__\\  \\__/  \\__/ /__/     \\__\\  |__|     (__)            \r\n" + 
+				"                                                                                                            ");
 		do {
 			int x;
 			sair = false;
@@ -51,7 +65,7 @@ public class Main {
 					System.out.printf("Digite seu email:");
 					t.nextLine();
 					email = t.nextLine();
-					System.out.printf("Digite sua senha: ");
+					System.out.printf("Digite sua senha:");
 					senha = t.nextLine();
 					instituicao = instituicaoDAO.login(email, senha);
 					if(instituicao.getDescricao() != null){
@@ -60,7 +74,7 @@ public class Main {
 							System.out.println(" \n1 - Gerenciar Eventos\n2 - Alterar Descrição\n3 - Alterar Cadastro\n4 - Listar Doações\n5 - Deslogar");
 							int i = t.nextInt();
 							if(i == 1){
-								System.out.println("1 - Criar Evento\n2 - Listar Evento\n");
+								System.out.println("\n1 - Criar Evento\n2 - Listar Evento\n");
 								int e = t.nextInt();
 								if(e == 1){
 									t.nextLine();
@@ -179,13 +193,13 @@ public class Main {
 								t.nextLine();
 								System.out.print("Dados da Instituição: \n");
 								System.out.print("Nome: ");
-								nome = t.next();
+								nome = t.nextLine();
 								System.out.print("Senha: ");
-								senha = t.next();
+								senha = t.nextLine();
 								System.out.print("Telefone: ");
-								telefone = t.next();
+								telefone = t.nextLine();
 								System.out.print("Descrição: ");
-								descricao = t.next();
+								descricao = t.nextLine();
 								instituicao.setNome(nome);
 								instituicao.setSenha(senha);
 								instituicao.setTelefone(telefone);
@@ -232,13 +246,13 @@ public class Main {
 					System.out.printf("Digite seu email:");
 					t.nextLine();
 					email = t.nextLine();
-					System.out.printf("Digite sua senha: ");
+					System.out.printf("Digite sua senha:");
 					senha = t.nextLine();
 					doador = doadorDAO.login(email, senha);
 					if(doador.getNome() != null){
 						do{
 							logado = true;
-							System.out.println("1 - Pesquisar Instituições por cidade\n2 - Pesquisar Instituições por nome "
+							System.out.println("\n1 - Pesquisar Instituições por cidade\n2 - Pesquisar Instituições por nome "
 									+ "\n3 - Pesquisar Eventos por cidade\n4 - Pesquisar Eventos por nome\n5 - Alterar cadastro\n6 - Deslogar");
 							int d = t.nextInt();
 							if(d == 1){

@@ -55,7 +55,7 @@ public class InstituicaoDAO{
 						e.printStackTrace();
 					}
 				}else{
-					System.out.println("Senha errada!");
+					System.out.println("Senha errada!\n");
 				}
 				
 			}else{
@@ -91,8 +91,8 @@ public class InstituicaoDAO{
 		    
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Email já registrado!\n");
+			//e.printStackTrace();
 		}finally{
 			this.conexao.fecharConexao();
 		}
